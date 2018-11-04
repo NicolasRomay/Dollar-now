@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="img/dollar.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dollar now</title>
+    <style>
+        body {
+            background-image: url(/img/dollar.png)
+            }
+        h1 {
+            font-size: 70px;text-align: center;color: green;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 
+        'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        h2 {
+            font-size: 60px;text-align: center;color: yellowgreen;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        p {
+            font-size: 70px;text-align: center;color:red;
+            background-color: black; 
+            font-family: Arial, Helvetica, sans-serif;
+        }
+       footer {
+           padding-left: 370px;padding-right: 370px;
+       }
+     </style>
+
+
+</head>
+<body>
+
+    <h1>Dollar now</h1>
+
+    <footer>
+    <p>Promedio:$</p>
+    <p>Compra:$</p>
+    <p>Venta:$</p>
+    </footer>
+
+</body>
+
+<script>
+    const url = "https://www.itmaster.com.ar/demos/dolar.php";
+        let xhr = new XMLHttpRequest()
+        xhr.open("GET", url);
+        xhr.send(null);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) 
+                console.log(xhr.response).toFixed(2)
+
+                let obj = JSON.parse(xhr.response)
+                console.log(obj)
+                console.log(obj.oficial.value_avg)
+                let p = document.querySelectorAll("p")
+                p[0].textContent+=obj.oficial.value_avg;
+                p[1].textContent+=obj.oficial.value_buy;
+                p[2].textContent+=obj.oficial.value_sell;
+            }
+</script>
+
+</html>
